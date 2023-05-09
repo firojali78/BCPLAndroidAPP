@@ -1,0 +1,45 @@
+[
+  {
+    "catagory_code": "BSLS",
+    "catagory_Name": "PYJAMA SET (BSLS)",
+    "description": "PYJAMA SET (BSLS)",
+    "remark": "PYJAMA SET (BSLS)"
+  },
+  {
+    "catagory_code": "BSSS",
+    "catagory_Name": "SHORTS (BSSS)",
+    "description": "SHORTS (BSSS)",
+    "remark": "SHORTS (BSSS)"
+  },
+  {
+    "catagory_code": "BSN",
+    "catagory_Name": "NIGHTY (BSN)",
+    "description": "NIGHTY (BSN)",
+    "remark": "NIGHTY (BSN)"
+  },
+  {
+    "catagory_code": "BSL",
+    "catagory_Name": "BSL",
+    "description": "BSL",
+    "remark": "BSL"
+  },
+  {
+    "catagory_code": "BSCS",
+    "catagory_Name": "CAPRI (BSCS)",
+    "description": "CAPRI (BSCS)",
+    "remark": "CAPRI (BSCS)"
+  },
+  {
+    "catagory_code": "BSNS",
+    "catagory_Name": "COLLAR NS (BSNS)",
+    "description": "COLLAR NS (BSNS)",
+    "remark": "COLLAR NS (BSNS)"
+  },
+  {
+    "catagory_code": "Fashion",
+    "catagory_Name": "Fashion",
+    "description": "Fashion",
+    "remark": "Fashion"
+  }
+
+]

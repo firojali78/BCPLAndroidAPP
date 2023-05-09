@@ -1,0 +1,73 @@
+[
+    {
+      "pid": "1",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image1.png",
+      "name": "Green TShirt",
+      "size": "S,M,L,XL,XXL,XXXL",
+      "catagory_code": "BSL"
+    },
+    {
+      "pid": "2",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image2.png",
+      "name": "White Hoodie",
+      "size": "S,M,L,XL,XXL,XXXL",
+      "catagory_code": "CAPRI (BSCS)"
+    },
+    {
+      "pid": "3",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image3.png",
+      "name": "Blue TShirt",
+      "size": "S,M,L,XL,XXL,XXXL",
+      "catagory_code": "COLLAR NS (BSNS)"
+    },
+    {
+      "pid": "4",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image4.png",
+      "name": "White Shirt",
+      "size": "S,M,L,XL,XXL,XXXL",
+      "catagory_code": "Fashion"
+    },
+    {
+      "pid": "5",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image5.png",
+      "name": "Yellow TShirt",
+      "size": "S,M,L,XL,XXL",
+      "catagory_code": "NIGHTY (BSN)"
+
+    },
+    {
+      "pid": "6",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image6.png",
+      "name": "Black TShirt",
+      "size": "S,M,L,XL,XXXL",
+      "catagory_code": "PYJAMA SET (BSLS)"
+    },
+    {
+      "pid": "7",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image7.png",
+      "name": "Red TShirt",
+      "size": "S,M,L,XXL,XXXL",
+      "catagory_code": "SHORTS (BSSS)"
+    },
+    {
+      "pid": "8",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image8.png",
+      "name": "Pink TShirt",
+      "size": "S,M,XL,XXL,XXXL",
+      "catagory_code": "Fashion"
+    },
+    {
+      "pid": "9",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image9.png",
+      "name": "Orange TShirt",
+      "size": "S,L,XL,XXL,XXXL",
+      "catagory_code": "CAPRI (BSCS)"
+    },
+    {
+      "pid": "10",
+      "imgUrl": "https://mdisdo.org/MobileAppTest/Image10.png",
+      "name": "Grey TShirt",
+      "size": "M,L,XL,XXL,XXXL",
+      "catagory_code": "BSL"
+    }
+]

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#AC4FFD"
+    android:padding="30dp"
+    tools:context=".Login">
+
+    <EditText
+        android:textColor="#000000"
+        android:textColorHint="#FAFAFA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="textCapCharacters"
+        android:id="@+id/username"/>
+    <EditText
+        android:textColor="#000000"
+        android:textColorHint="#fff"
+        android:inputType="textWebPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:id="@+id/password"/>
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="Distributor"
+        android:enabled="true"
+        android:textOn="RSM/ASM"
+        android:id="@+id/login_toggle"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:elevation="400dp"
+        android:shadowColor="#FF0000"
+        android:textColor="#2CC335"
+        android:id="@+id/btn_login"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv1"/>
+
+</LinearLayout>
