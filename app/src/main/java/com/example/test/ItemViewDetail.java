@@ -31,9 +31,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ItemViewDetail extends AppCompatActivity {
     EditText e1,e2,e3,e4,e5,e6;
@@ -70,11 +72,16 @@ public class ItemViewDetail extends AppCompatActivity {
         init_layout();
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+
             session_username = extras.getString("session_username");
             session_id = extras.getString("session_id");
             store = extras.getString("store_name");
             customer_id = extras.getString("customer_id");
             category_id = extras.getString("catagory_id");
+            for (String key: extras.keySet())
+            {
+                System.out.println( "Keys in bundles in ItemDetails Page "+key + " "+extras.getString(key) );
+            }
 
             Toast.makeText(this, session_id, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
@@ -129,10 +136,10 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     l =0;
                 }
-                else if(e3.getText().toString().equals("40"))
-                {
-                    Toast.makeText(ItemViewDetail.this, "Out of Stock", Toast.LENGTH_SHORT).show();
-                }
+//                else if(e3.getText().toString().equals("40"))
+//                {
+//                    Toast.makeText(ItemViewDetail.this, "Out of Stock", Toast.LENGTH_SHORT).show();
+//                }
                 else
                 {
                     l = Integer.parseInt(e3.getText().toString());
@@ -161,9 +168,83 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     xxxl = Integer.parseInt(e6.getText().toString());
                 }
+                try {
+                    hitsubmit(pid,s,m,l,xl,xxl,xxxl);
+                } catch (AuthFailureError e) {
+                    throw new RuntimeException(e);
+                }
                 Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void hitsubmit(String pid,int s, int m, int l, int xl, int xxl, int xxxl) throws AuthFailureError {
+        StringRequest request = new StringRequest(Request.Method.POST, "http://49.249.232.210:6262/webCreateSOMobileApp", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Response on submit button ItemviewDetail "+ response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(ItemViewDetail.this, error.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(error.toString());
+                Log.d("ItemViewDetail", "Error: " + error
+                        + "\nStatus Code " + error.networkResponse.statusCode
+                        + "\nResponse Data " + error.networkResponse.data
+                        + "\nCause " + error.getCause()
+                        + "\nmessage" + error.getMessage());
+
+            }
+
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                // params.put("Content-Type", "application/json");
+                params.put("Accept","*/*");
+                params.put("Accept-Encoding","gzip, deflate, br");
+                params.put("Connection","keep-alive");
+                return params;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return getParams().toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String sizes= s+","+m+","+l+","+xl+","+xxl+","+xxxl;
+                Map<String,String>params=new HashMap<>();
+                params.put("CustomerNo",session_id);
+                params.put("ItemNo",pid);
+                params.put("ItemSize", sizes);
+                params.put("ItemCategoryCode", category_id);
+                params.put("Remark", "");
+                params.put("DocumentNo", "");
+                params.put("BillToCustomer", "");
+                params.put("SellToCustomer", "");
+                params.put("UserID", session_id);
+                params.put("StoreName", store);
+                params.put("LocationCode", "");
+
+                System.out.println(params.toString()+"Payload for Itemviewdetails");
+
+                return params;
+            }
+
+        };
+        Volley.newRequestQueue(this).add(request);
+        Log.i("ItemViewDetail", "Request body: " + new String(request.getBodyContentType() +"--~--"+ new String(request.getHeaders().toString()))+"--~--"+ new String(request.getBody()));
+
     }
 
 
@@ -185,7 +266,7 @@ public class ItemViewDetail extends AppCompatActivity {
     {
         JSONObject jsonObject =null;
         try {
-            System.out.println("calling load "+json);
+            System.out.println("calling load "+ json);
             JSONArray jsonArray = new JSONArray(json);
             int max = jsonArray.length();
             max_size = max;
@@ -230,7 +311,7 @@ public class ItemViewDetail extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        System.out.println(response+" Response from API");
+                        System.out.println("Response from Fetch API itemviewdetail "+response);
                         callback.onSuccess(response);
 
                     }
@@ -297,6 +378,8 @@ public class ItemViewDetail extends AppCompatActivity {
             }
         }
     }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event)

@@ -31,6 +31,11 @@ public class Store_Name extends AppCompatActivity {
             session_id = extras.getString("session_id");
             customer_id = extras.getString("customer_id");
 
+            for (String key: extras.keySet())
+            {
+                System.out.println( "Keys in bundles in Store Name Page "+key + " "+extras.getString(key) );
+            }
+
         }
         b1.setOnClickListener(new View.OnClickListener() {
             @Override

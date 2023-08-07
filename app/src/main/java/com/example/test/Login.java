@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
             public void onResponse(String response) {
                 String session_username = "";
                 String customer_code = "";
-                System.out.println(response);
+                System.out.println("Response from Login "+response);
                 Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
                 tv1.setText(response);
                 JSONObject obj = null;
@@ -99,6 +99,7 @@ public class Login extends AppCompatActivity {
                             i.putExtra("session_id",username);
                             i.putExtra("session_username",session_username);
                             i.putExtra("customer_code", customer_code);
+                            i.putExtra("store_name","");
                             startActivity(i);
                         }
                         else
@@ -160,7 +161,7 @@ public class Login extends AppCompatActivity {
                 params.put("UserID",username);
                 params.put("PWS",password);
                 params.put("LoginType", login_type);
-                System.out.println(params.toString());
+               // System.out.println(params.toString());
 
                 return params;
             }

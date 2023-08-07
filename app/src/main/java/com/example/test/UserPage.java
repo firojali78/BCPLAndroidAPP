@@ -80,6 +80,11 @@ public class UserPage extends AppCompatActivity {
             session_username = extras.getString("session_username");
             t1.setText("Hello " + session_username);
             session_id = extras.getString("session_id");
+
+            for (String key: extras.keySet())
+            {
+                System.out.println( "Keys in bundles in UserPage "+key + " "+extras.getString(key) );
+            }
         }
 
 
@@ -142,7 +147,7 @@ public class UserPage extends AppCompatActivity {
                     public void onResponse(String response) {
                         String json;
                         json = response;
-                        System.out.println(response+"klklk");
+                        System.out.println("Response from UserPage "+response);
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(json);
@@ -154,8 +159,8 @@ public class UserPage extends AppCompatActivity {
 
                                 customer_name = jsonObject.getString("Description");
                                 customer_id = jsonObject.getString("No");
-                                System.out.println(customer_id + " customer_id " + i);
-                                System.out.println(customer_name + " customer_name " + i);
+                               // System.out.println(customer_id + " customer_id " + i);
+                             //   System.out.println(customer_name + " customer_name " + i);
                                 HashMap<String, String> cust_names = new HashMap<>();
                                 cust_names.put("name", customer_name);
                                 cust_names.put("id", customer_id);
@@ -163,13 +168,13 @@ public class UserPage extends AppCompatActivity {
                             }
                                 ArrayList<HashMap<String, String>> data = null;
                                 data = c_names;
-                                System.out.println(c_names.toString()+" c_names");
+                           //     System.out.println(c_names.toString()+" c_names");
                                 String[] array_name = new String[data.size()];
                                // arrayAdapter.clear();
                                 for (int ii = 0; ii < array_name.length; ii++)
                                 {
                                     array_name[ii] = c_names.get(ii).get("name");
-                                    System.out.println(array_name[ii] +" array_name ");
+                                //    System.out.println(array_name[ii] +" array_name ");
 
                                 }
                             arrayAdapter = new ArrayAdapter<String>(UserPage.this, android.R.layout.simple_list_item_1, array_name);
@@ -187,7 +192,7 @@ public class UserPage extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.toString()+"ssssss");
+                System.out.println(error.toString()+" Error in syncing user page");
 
             }
         });

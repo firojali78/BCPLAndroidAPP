@@ -66,8 +66,12 @@ public class Catagory extends AppCompatActivity {
             customer_id = extras.getString("customer_id");
 
             t1.setText("Hello "+session_username);
-            Toast.makeText(this, session_id, Toast.LENGTH_SHORT).show();
+
             //The key argument here must match that used in the other activity
+            for (String key: extras.keySet())
+            {
+                System.out.println( "Keys in bundles in Catagory Page "+key + " "+extras.getString(key) );
+            }
         }
 
         catagories = new ArrayList<>();
@@ -114,7 +118,7 @@ public class Catagory extends AppCompatActivity {
                     public void onResponse(String response) {
                         String json;
                         json = response;
-                        System.out.println(response+"klklk");
+                        System.out.println("Response from Catagory "+response);
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(json);
@@ -126,8 +130,8 @@ public class Catagory extends AppCompatActivity {
 
                                 catagory_name = jsonObject.getString("catagory_code");
                                 catagory_id = jsonObject.getString("catagory_Name");
-                                System.out.println(catagory_id + " category name " + i);
-                                System.out.println(catagory_name + " category name " + i);
+                                //System.out.println(catagory_id + " category name " + i);
+                             //   System.out.println(catagory_name + " category name " + i);
                                 HashMap<String, String> cust_names = new HashMap<>();
                                 cust_names.put("name", catagory_name);
                                 cust_names.put("id", catagory_id);
@@ -135,7 +139,7 @@ public class Catagory extends AppCompatActivity {
                             }
                             ArrayList<HashMap<String, String>> data = null;
                             data = catagories;
-                            System.out.println(catagories.toString()+" c_category");
+                          //  System.out.println(catagories.toString()+" c_category");
                             String[] array_name = new String[data.size()];
                             // arrayAdapter.clear();
                             for (int ii = 0; ii < array_name.length; ii++)
@@ -166,7 +170,7 @@ public class Catagory extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.toString()+"ssssss");
+                System.out.println(error.toString()+" Error in HItting API");
 
             }
         });
