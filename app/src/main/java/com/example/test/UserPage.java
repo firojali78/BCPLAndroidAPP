@@ -108,8 +108,9 @@ public class UserPage extends AppCompatActivity {
                 Toast.makeText((Context) UserPage.this, c_names.get(i).get("id"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UserPage.this, Store_Name.class);
                 intent.putExtra("customer_id", c_names.get(i).get("id"));
-                intent.putExtra("session_id", session_id);
+                intent.putExtra("session_id", customer_id);
                 intent.putExtra("session_username", session_username);
+
 
                 startActivity(intent);
             }

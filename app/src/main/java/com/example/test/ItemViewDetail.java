@@ -83,7 +83,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 System.out.println( "Keys in bundles in ItemDetails Page "+key + " "+extras.getString(key) );
             }
 
-            Toast.makeText(this, session_id, Toast.LENGTH_SHORT).show();
+
             //The key argument here must match that used in the other activity
         }
 
