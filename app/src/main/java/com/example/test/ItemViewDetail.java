@@ -179,7 +179,9 @@ public class ItemViewDetail extends AppCompatActivity {
     }
 
     private void hitsubmit(String pid,int s, int m, int l, int xl, int xxl, int xxxl) throws AuthFailureError {
-        StringRequest request = new StringRequest(Request.Method.POST, "http://49.249.232.210:6262/webCreateSOMobileApp", new Response.Listener<String>() {
+        String url = "http://49.249.232.210:6262/webCreateSOMobileApp?&CustomerNo="+session_id.toString()+"&ItemNo="+pid.toString()+"&ItemSize="+s+","+m+","+l+","+xl+","+xxl+","+xxxl+"&Remark=&DocumentNo=&BillToCustomer=&SellToCustomer=&UserID="+session_id+"&StoreName="+store+"&LocationCode=&ItemCategoryCode="+category_id;
+        System.out.println("url request "+url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Response on submit button ItemviewDetail "+ response);
@@ -198,7 +200,6 @@ public class ItemViewDetail extends AppCompatActivity {
                         + "\nmessage" + error.getMessage());
 
             }
-
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
