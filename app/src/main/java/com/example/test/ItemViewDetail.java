@@ -53,6 +53,7 @@ public class ItemViewDetail extends AppCompatActivity {
     String store="";
     String customer_id="";
     String category_id ="";
+    String catagory_pid = "";
     String json="";
 
 
@@ -79,6 +80,7 @@ public class ItemViewDetail extends AppCompatActivity {
             store = extras.getString("store_name");
             customer_id = extras.getString("customer_id");
             category_id = extras.getString("catagory_id");
+            catagory_pid = extras.getString("catagory_pid");
             for (String key: extras.keySet())
             {
                 System.out.println( "Keys in bundles in ItemDetails Page "+key + " "+extras.getString(key) );
@@ -94,7 +96,7 @@ public class ItemViewDetail extends AppCompatActivity {
 
 
         try {
-            say(category_id,new VolleyCallback(){
+            say(catagory_pid,new VolleyCallback(){
                 @Override
                 public void onSuccess(String result){
                     System.out.println("After callback "+result);
@@ -306,7 +308,8 @@ public class ItemViewDetail extends AppCompatActivity {
         final String[] res = new String[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://49.249.232.210:6262/webitemmasterapp?catagory_code="+category_code;
+        String url = "http://49.249.232.210:6262/webitemmasterapp?catagory_code="+category_code.trim();
+        System.out.println("Printing connection URL "+url+" .");
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

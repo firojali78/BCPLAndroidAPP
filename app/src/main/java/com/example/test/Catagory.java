@@ -98,6 +98,7 @@ public class Catagory extends AppCompatActivity {
                             ItemViewDetail.class);
 
                     intent.putExtra("catagory_id", catagories.get(i).get("id"));
+                    intent.putExtra("catagory_pid", catagories.get(i).get("name"));
                     intent.putExtra("session_username", session_username);
                     intent.putExtra("session_id", session_id);
                     intent.putExtra("customer_id", customer_id);
