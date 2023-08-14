@@ -38,6 +38,7 @@ public class Catagory extends AppCompatActivity {
     int max_size;
     String catagory_name="";
     String catagory_id="";
+    int catagory_size=0;
     ArrayList<HashMap<String,String>> catagories;
     ArrayAdapter<String> arrayAdapter;
 
@@ -65,7 +66,7 @@ public class Catagory extends AppCompatActivity {
             store = extras.getString("store_name");
             customer_id = extras.getString("customer_id");
 
-            t1.setText("Hello "+session_username);
+            t1.setText("Hello "+session_username +" ("+ session_id+ " )");
 
             //The key argument here must match that used in the other activity
             for (String key: extras.keySet())
@@ -85,18 +86,26 @@ public class Catagory extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText((Context) Catagory.this,  catagories.get(i).get("id"), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(Catagory.this,
-                        ItemViewDetail.class);
+                if(Integer.parseInt(catagories.get(i).get("size"))<=0)
+                {
+                    Toast.makeText(Catagory.this, "No items available in this category", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                intent.putExtra("catagory_id",catagories.get(i).get("id"));
-                intent.putExtra("session_username",session_username);
-                intent.putExtra("session_id",session_id);
-                intent.putExtra("customer_id", customer_id);
-                intent.putExtra("store_name",store);
 
-                //Intent is used to switch from one activity to another.
-                startActivity(intent);
+                    Toast.makeText((Context) Catagory.this, catagories.get(i).get("id"), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Catagory.this,
+                            ItemViewDetail.class);
+
+                    intent.putExtra("catagory_id", catagories.get(i).get("id"));
+                    intent.putExtra("session_username", session_username);
+                    intent.putExtra("session_id", session_id);
+                    intent.putExtra("customer_id", customer_id);
+                    intent.putExtra("store_name", store);
+
+                    //Intent is used to switch from one activity to another.
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -130,11 +139,13 @@ public class Catagory extends AppCompatActivity {
 
                                 catagory_name = jsonObject.getString("catagory_code");
                                 catagory_id = jsonObject.getString("catagory_Name");
+                                catagory_size = jsonObject.getInt("ItemCount");
                                 //System.out.println(catagory_id + " category name " + i);
                              //   System.out.println(catagory_name + " category name " + i);
                                 HashMap<String, String> cust_names = new HashMap<>();
                                 cust_names.put("name", catagory_name);
                                 cust_names.put("id", catagory_id);
+                                cust_names.put("size", String.valueOf(catagory_size));
                                 catagories.add(cust_names);
                             }
                             ArrayList<HashMap<String, String>> data = null;

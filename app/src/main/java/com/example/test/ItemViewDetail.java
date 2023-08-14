@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.lang.annotation.Target;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -179,7 +180,7 @@ public class ItemViewDetail extends AppCompatActivity {
     }
 
     private void hitsubmit(String pid,int s, int m, int l, int xl, int xxl, int xxxl) throws AuthFailureError {
-        String url = "http://49.249.232.210:6262/webCreateSOMobileApp?&CustomerNo="+session_id.toString()+"&ItemNo="+pid.toString()+"&ItemSize="+s+","+m+","+l+","+xl+","+xxl+","+xxxl+"&Remark=&DocumentNo=&BillToCustomer=&SellToCustomer=&UserID="+session_id+"&StoreName="+store+"&LocationCode=&ItemCategoryCode="+category_id;
+        String url = "http://49.249.232.210:6262/webCreateSOMobileApp?&CustomerNo="+session_id.toString()+"&ItemNo="+pid.toString()+"&ItemSize="+s+","+m+","+l+","+xl+","+xxl+","+xxxl+"&Remark=&DocumentNo=&BillToCustomer=&SellToCustomer=&UserID="+session_username+"&StoreName="+store+"&LocationCode=&ItemCategoryCode="+category_id;
         System.out.println("url request "+url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -259,7 +260,8 @@ public class ItemViewDetail extends AppCompatActivity {
         e6.setEnabled(false);
 
         t_name.setText(name);
-        Glide.with(this).load(url).into((ImageView) iv1);
+        Glide.with(this).load(url).error(R.drawable.ic_launcher_background).
+                into((ImageView) iv1);
     }
 
 
@@ -283,7 +285,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 pid = jsonObject.getString("Item_No");
                 edit.putString("pid", pid);
                 edit.commit();
-                setView(name,url);
+                setView(name+"\n"+pid,url);
                 enableEditText(jsonObject);
 
             } catch (JSONException e) {

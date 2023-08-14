@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Catagory">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="Customer Name"
         android:id="@+id/tv_catagory_customer"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Item Category List"
+            />
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
