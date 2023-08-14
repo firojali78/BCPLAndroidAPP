@@ -3,7 +3,9 @@ package com.example.test;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.lang.annotation.Target;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -57,6 +60,7 @@ public class ItemViewDetail extends AppCompatActivity {
     String category_id ="";
     String catagory_pid = "";
     String json="";
+    String url_to_zoom="";
 
 
     public interface VolleyCallback{
@@ -182,6 +186,20 @@ public class ItemViewDetail extends AppCompatActivity {
                 Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
             }
         });
+
+        /*
+        iv1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent i = new Intent(ItemViewDetail.this, com.example.test.ImageView.class);
+                i.putExtra("url", url_to_zoom);
+                System.out.println("Passing URL "+ url_to_zoom);
+                startActivity(i);
+                return false;
+            }
+        });*/
+
+
     }
 
     private void hitsubmit(String pid,int s, int m, int l, int xl, int xxl, int xxxl) throws AuthFailureError {
@@ -292,6 +310,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 edit.putString("pid", pid);
                 edit.commit();
                 setView(name+"\n"+pid,url);
+                url_to_zoom = url;
                 enableEditText(jsonObject);
 
             } catch (JSONException e) {
@@ -433,6 +452,7 @@ public class ItemViewDetail extends AppCompatActivity {
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
                                 setView(name+"\n"+pid, url);
+                                url_to_zoom = url;
                                 enableEditText(jsonObject);
 
                             } catch (JSONException e) {
@@ -472,6 +492,7 @@ public class ItemViewDetail extends AppCompatActivity {
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
                                 setView(name+"\n"+pid, url);
+                                url_to_zoom = url;
                                 enableEditText(jsonObject);
 
                             } catch (JSONException e) {
