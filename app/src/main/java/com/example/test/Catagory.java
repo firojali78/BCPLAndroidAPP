@@ -167,8 +167,8 @@ public class Catagory extends AppCompatActivity {
                                     Catagory.this,
                                     data,
                                     R.layout.row_items,
-                                    new String[] {"name", "id"},
-                                    new int[]{R.id.tv_c_name, R.id.tv_c_id}
+                                    new String[] {"name", "id","size"},
+                                    new int[]{R.id.tv_c_name, R.id.tv_c_id,R.id.tv_c_size}
                             );
                             lv.setAdapter(listAdapter);
 
