@@ -42,11 +42,13 @@ public class ItemViewDetail extends AppCompatActivity {
     EditText e1,e2,e3,e4,e5,e6;
     Button b1;
     View iv1;
-    TextView t_name;
+    TextView t_name, t_page_count;
     SharedPreferences sharedPreferences;
     private float x1,x2;
     static final int MIN_DISTANCE = 150;
     int max_size;
+    int counter_items=1;
+    int counter_items_total = 0;
 
     String session_id = "C1";
     String session_username = "Akash";
@@ -81,6 +83,7 @@ public class ItemViewDetail extends AppCompatActivity {
             customer_id = extras.getString("customer_id");
             category_id = extras.getString("catagory_id");
             catagory_pid = extras.getString("catagory_pid");
+            counter_items_total = Integer.parseInt(extras.getString("counter"));
             for (String key: extras.keySet())
             {
                 System.out.println( "Keys in bundles in ItemDetails Page "+key + " "+extras.getString(key) );
@@ -262,6 +265,7 @@ public class ItemViewDetail extends AppCompatActivity {
         e6.setEnabled(false);
 
         t_name.setText(name);
+        t_page_count.setText(counter_items+" / "+counter_items_total);
         Glide.with(this).load(url).error(R.drawable.ic_launcher_background).
                 into((ImageView) iv1);
     }
@@ -349,6 +353,7 @@ public class ItemViewDetail extends AppCompatActivity {
         b1 = findViewById(R.id.btn_submit);
         iv1 = findViewById(R.id.p_images);
         t_name = findViewById(R.id.p_name);
+        t_page_count = findViewById(R.id.p_counter);
     }
 
     private void enableEditText(JSONObject jsonObject) throws JSONException {
@@ -407,20 +412,27 @@ public class ItemViewDetail extends AppCompatActivity {
                     {
                         SharedPreferences sh = getSharedPreferences("Pref", Context.MODE_PRIVATE);
                         System.out.println("Current index "+sh.getInt("json_val",0));
+
+
                         int index = sh.getInt("json_val",0);
+
                         String name, url, pid="1";
                         if(index == 0)
                         {
                             Toast.makeText(this, "This is first item", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            counter_items--;
+                            t_page_count.setText(counter_items+" / "+counter_items_total);
+
                             index = index - 1;
+
                             JSONObject jsonObject = loadJson(index);
                             try {
                                 name = jsonObject.getString("Name");
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
-                                setView(name, url);
+                                setView(name+"\n"+pid, url);
                                 enableEditText(jsonObject);
 
                             } catch (JSONException e) {
@@ -440,20 +452,26 @@ public class ItemViewDetail extends AppCompatActivity {
 
                         SharedPreferences sh = getSharedPreferences("Pref", Context.MODE_PRIVATE);
                         System.out.println("Current index "+sh.getInt("json_val",0));
+
+
                         int index = sh.getInt("json_val",0);
+
                         if(index == max_size-1)
                         {
                             Toast.makeText(this, "This is Last item", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            counter_items++;
+                            t_page_count.setText(counter_items+" / "+counter_items_total);
                             index = index + 1;
+
                             String name, url, pid = "1";
                             JSONObject jsonObject = loadJson(index);
                             try {
                                 name = jsonObject.getString("Name");
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
-                                setView(name, url);
+                                setView(name+"\n"+pid, url);
                                 enableEditText(jsonObject);
 
                             } catch (JSONException e) {

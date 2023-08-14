@@ -103,6 +103,7 @@ public class Catagory extends AppCompatActivity {
                     intent.putExtra("session_id", session_id);
                     intent.putExtra("customer_id", customer_id);
                     intent.putExtra("store_name", store);
+                    intent.putExtra("counter", catagories.get(i).get("size"));
 
                     //Intent is used to switch from one activity to another.
                     startActivity(intent);
