@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONArray;
@@ -323,7 +324,7 @@ public class ItemViewDetail extends AppCompatActivity {
                         pb.setVisibility(View.GONE);
                         return false;
                     }
-                })
+                }).apply(new RequestOptions().override(150, 150))
                 .error(R.drawable.ic_launcher_background).
                 into((ImageView) iv1);
     }
