@@ -218,7 +218,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 response = response.replaceAll("\\\\","");
                 System.out.println("Response on submit button ItemviewDetail "+ response);
                 Toast.makeText(ItemViewDetail.this, response, Toast.LENGTH_SHORT).show();
-                if(response.contains("Success\":\"False"))
+                if(!response.contains("Success\":\"False"))
                 {
                     reset_editText();
                 }
