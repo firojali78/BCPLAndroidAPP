@@ -93,7 +93,7 @@ public class Catagory extends AppCompatActivity {
                 else {
 
 
-                    Toast.makeText((Context) Catagory.this, catagories.get(i).get("id"), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText((Context) Catagory.this, catagories.get(i).get("id"), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Catagory.this,
                             ItemViewDetail.class);
 

@@ -34,7 +34,7 @@ public class ImageView extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
 
-        Glide.with(this).load(url).error(R.drawable.ic_launcher_background).
+        Glide.with(this).load(url).error(R.drawable.ic_launcher_background).dontTransform().
                 into((android.widget.ImageView) iv1);
 
 

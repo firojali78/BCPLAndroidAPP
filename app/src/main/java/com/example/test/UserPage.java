@@ -105,7 +105,7 @@ public class UserPage extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText((Context) UserPage.this, c_names.get(i).get("id"), Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(UserPage.this, Store_Name.class);
                 intent.putExtra("customer_id", c_names.get(i).get("id"));
                 intent.putExtra("session_id", customer_id);

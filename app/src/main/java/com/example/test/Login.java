@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Login.this, tb.getText().toString().trim(), Toast.LENGTH_LONG).show();
+
                 try {
                     say(e1.getText().toString().trim(),e2.getText().toString().trim(),tb.getText().toString().trim());
                 } catch (AuthFailureError e) {
@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
                 String session_username = "";
                 String customer_code = "";
                 System.out.println("Response from Login "+response);
-                Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
+
                 tv1.setText(response);
                 JSONObject obj = null;
                 try {

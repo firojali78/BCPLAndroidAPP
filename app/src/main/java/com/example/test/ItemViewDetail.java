@@ -1,11 +1,13 @@
 package com.example.test;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,13 +30,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.lang.annotation.Target;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -61,6 +67,7 @@ public class ItemViewDetail extends AppCompatActivity {
     String catagory_pid = "";
     String json="";
     String url_to_zoom="";
+    ProgressBar pb;
 
 
     public interface VolleyCallback{
@@ -183,7 +190,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 } catch (AuthFailureError e) {
                     throw new RuntimeException(e);
                 }
-                Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -209,6 +216,7 @@ public class ItemViewDetail extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 System.out.println("Response on submit button ItemviewDetail "+ response);
+                Toast.makeText(ItemViewDetail.this, response, Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
@@ -269,7 +277,7 @@ public class ItemViewDetail extends AppCompatActivity {
         };
         Volley.newRequestQueue(this).add(request);
         Log.i("ItemViewDetail", "Request body: " + new String(request.getBodyContentType() +"--~--"+ new String(request.getHeaders().toString()))+"--~--"+ new String(request.getBody()));
-
+        reset_editText();
     }
 
 
@@ -284,7 +292,24 @@ public class ItemViewDetail extends AppCompatActivity {
 
         t_name.setText(name);
         t_page_count.setText(counter_items+" / "+counter_items_total);
-        Glide.with(this).load(url).error(R.drawable.ic_launcher_background).
+        iv1.setVisibility(View.GONE);
+        pb.setVisibility(View.VISIBLE);
+        Glide.with(this).load(url).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        iv1.setVisibility(View.VISIBLE);
+                        pb.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        iv1.setVisibility(View.VISIBLE);
+                        pb.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .error(R.drawable.ic_launcher_background).
                 into((ImageView) iv1);
     }
 
@@ -373,6 +398,17 @@ public class ItemViewDetail extends AppCompatActivity {
         iv1 = findViewById(R.id.p_images);
         t_name = findViewById(R.id.p_name);
         t_page_count = findViewById(R.id.p_counter);
+        pb = findViewById(R.id.p_progress_bar);
+    }
+
+    private void reset_editText() {
+        e1.setText("");
+        e2.setText("");
+        e3.setText("");
+        e4.setText("");
+        e5.setText("");
+        e6.setText("");
+
     }
 
     private void enableEditText(JSONObject jsonObject) throws JSONException {
@@ -463,7 +499,7 @@ public class ItemViewDetail extends AppCompatActivity {
                         edit.putInt("json_val", index);
                         edit.putString("pid", pid);
                         edit.commit();
-                   //     Toast.makeText(this, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+
                     }
 
                     // Right to left swipe action
@@ -505,7 +541,7 @@ public class ItemViewDetail extends AppCompatActivity {
                             edit.commit();
                         }
 
-                       // Toast.makeText(this, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
+
                     }
 
                 }
