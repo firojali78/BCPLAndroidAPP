@@ -317,9 +317,9 @@ public class ItemViewDetail extends AppCompatActivity {
                         iv1.setVisibility(View.VISIBLE);
                         pb.setVisibility(View.GONE);
 
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
+                   //     Intent i = new Intent(Intent.ACTION_VIEW);
+                     //   i.setData(Uri.parse(url));
+                       // startActivity(i);
                         return false;
                     }
 
