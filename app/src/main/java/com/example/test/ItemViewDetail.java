@@ -215,9 +215,11 @@ public class ItemViewDetail extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+
                 response = response.replaceAll("\\\\","");
                 System.out.println("Response on submit button ItemviewDetail "+ response);
-                Toast.makeText(ItemViewDetail.this, response, Toast.LENGTH_SHORT).show();
+
                 if(!response.contains("Success\":\"False"))
                 {
                     reset_editText();
@@ -226,6 +228,10 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     System.out.println("Not in IF Itemviewdetails");
                 }
+                int f = response.indexOf(",\"Message\":");
+                String res = response.substring(f+12);
+                System.out.println("Res "+res);
+                Toast.makeText(ItemViewDetail.this, res, Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
