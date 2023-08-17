@@ -215,8 +215,17 @@ public class ItemViewDetail extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                response = response.replaceAll("\\\\","");
                 System.out.println("Response on submit button ItemviewDetail "+ response);
                 Toast.makeText(ItemViewDetail.this, response, Toast.LENGTH_SHORT).show();
+                if(response.contains("Success\":\"False"))
+                {
+                    reset_editText();
+                }
+                else
+                {
+                    System.out.println("Not in IF Itemviewdetails");
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -277,7 +286,7 @@ public class ItemViewDetail extends AppCompatActivity {
         };
         Volley.newRequestQueue(this).add(request);
         Log.i("ItemViewDetail", "Request body: " + new String(request.getBodyContentType() +"--~--"+ new String(request.getHeaders().toString()))+"--~--"+ new String(request.getBody()));
-        reset_editText();
+
     }
 
 
