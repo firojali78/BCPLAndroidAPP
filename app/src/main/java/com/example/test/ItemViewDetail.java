@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -315,6 +316,10 @@ public class ItemViewDetail extends AppCompatActivity {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         iv1.setVisibility(View.VISIBLE);
                         pb.setVisibility(View.GONE);
+
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
                         return false;
                     }
 
@@ -324,7 +329,7 @@ public class ItemViewDetail extends AppCompatActivity {
                         pb.setVisibility(View.GONE);
                         return false;
                     }
-                }).apply(new RequestOptions().override(150, 150))
+                })//.apply(new RequestOptions().override(150, 150))
                 .error(R.drawable.ic_launcher_background).
                 into((ImageView) iv1);
     }
