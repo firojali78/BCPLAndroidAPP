@@ -231,7 +231,7 @@ public class ItemViewDetail extends AppCompatActivity {
                     System.out.println("Not in IF Itemviewdetails");
                 }
                 int f = response.indexOf(",\"Message\":");
-                String res = response.substring(f+12, response.length()-3);
+                String res = response.substring(f+12, response.length()-4);
                 System.out.println("Res "+res);
                 Toast.makeText(ItemViewDetail.this, res, Toast.LENGTH_SHORT).show();
 
