@@ -187,13 +187,18 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     xxxl = Integer.parseInt(e6.getText().toString());
                 }
+                if(s ==0 && m ==0 && l ==0 && xl == 0 && xxl == 0 && xxxl == 0)
+                {
+                    Toast.makeText(ItemViewDetail.this, "Please enter atleast one size to submit", Toast.LENGTH_SHORT).show();
+                }
+                else {
                 try {
                     hitsubmit(pid,s,m,l,xl,xxl,xxxl);
                 } catch (AuthFailureError e) {
                     throw new RuntimeException(e);
                 }
             //    Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
-            }
+            }}
         });
 
         /*
