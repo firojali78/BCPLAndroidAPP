@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
@@ -52,7 +54,7 @@ import java.util.Map;
 public class ItemViewDetail extends AppCompatActivity {
     EditText e1,e2,e3,e4,e5,e6;
     Button b1;
-    View iv1;
+    ImageView iv1;
     TextView t_name, t_page_count;
     SharedPreferences sharedPreferences;
     private float x1,x2;
@@ -303,7 +305,7 @@ public class ItemViewDetail extends AppCompatActivity {
     }
 
 
-    private void setView(String name, String url)
+    private void setView(String name, String url, String pid)
     {
         e1.setEnabled(false);
         e2.setEnabled(false);
@@ -316,6 +318,38 @@ public class ItemViewDetail extends AppCompatActivity {
         t_page_count.setText(counter_items+" / "+counter_items_total);
         iv1.setVisibility(View.GONE);
         pb.setVisibility(View.VISIBLE);
+        /*
+        ContextWrapper cw = new ContextWrapper(this);
+        File directory = cw.getDir("BCPL", Context.MODE_PRIVATE);
+        File mypath=new File(directory,pid);
+        iv1.setImageDrawable(Drawable.createFromPath(mypath.toString()));
+        iv1.setVisibility(View.VISIBLE);
+        pb.setVisibility(View.GONE);
+
+         */
+        try {
+
+            String mDrawableName = pid.toLowerCase();
+            System.out.println("PID logged "+mDrawableName);
+            int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+            System.out.println("RESID " +resID);
+            if(resID == 0)
+            {
+                iv1.setImageResource(R.drawable.ic_launcher_background);
+            }
+            else {
+                iv1.setImageResource(resID);
+            }
+            iv1.setVisibility(View.VISIBLE);
+            pb.setVisibility(View.GONE);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to load image "+ e);
+
+        }
+
+        /*
         Glide.with(this).load(url).listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -337,6 +371,10 @@ public class ItemViewDetail extends AppCompatActivity {
                 })//.apply(new RequestOptions().override(150, 150))
                 .error(R.drawable.ic_launcher_background).
                 into((ImageView) iv1);
+
+         */
+
+
     }
 
 
@@ -360,7 +398,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 pid = jsonObject.getString("Item_No");
                 edit.putString("pid", pid);
                 edit.commit();
-                setView(name+"\n"+pid,url);
+                setView(name+"\n"+pid,url, pid);
                 url_to_zoom = url;
                 enableEditText(jsonObject);
 
@@ -473,6 +511,7 @@ public class ItemViewDetail extends AppCompatActivity {
 
 
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -513,7 +552,7 @@ public class ItemViewDetail extends AppCompatActivity {
                                 name = jsonObject.getString("Name");
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
-                                setView(name+"\n"+pid, url);
+                                setView(name+"\n"+pid, url, pid);
                                 url_to_zoom = url;
                                 enableEditText(jsonObject);
 
@@ -553,7 +592,7 @@ public class ItemViewDetail extends AppCompatActivity {
                                 name = jsonObject.getString("Name");
                                 url = jsonObject.getString("Image_URL");
                                 pid = jsonObject.getString("Item_No");
-                                setView(name+"\n"+pid, url);
+                                setView(name+"\n"+pid, url, pid);
                                 url_to_zoom = url;
                                 enableEditText(jsonObject);
 
