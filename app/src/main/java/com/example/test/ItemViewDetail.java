@@ -311,7 +311,7 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setEnabled(false);
         e5.setEnabled(false);
         e6.setEnabled(false);
-        System.out.println("Printing for debugging name "+name+", url "+url +"pid "+ pid);
+        System.out.println("Printing for debugging name "+name+", url "+url +"pid ");
 
         t_name.setText(name);
         t_page_count.setText(counter_items+" / "+counter_items_total);
@@ -346,7 +346,9 @@ public class ItemViewDetail extends AppCompatActivity {
         JSONObject jsonObject =null;
         try {
             System.out.println("calling load "+ json);
+
             JSONArray jsonArray = new JSONArray(json);
+
             int max = jsonArray.length();
             max_size = max;
             sharedPreferences = getSharedPreferences("Pref", MODE_PRIVATE);
@@ -355,6 +357,7 @@ public class ItemViewDetail extends AppCompatActivity {
             edit.commit();
             String name, url,pid;
             jsonObject = jsonArray.getJSONObject(i);
+
             try {
                 name = jsonObject.getString("Name");
                 url = jsonObject.getString("Image_URL");
@@ -374,6 +377,7 @@ public class ItemViewDetail extends AppCompatActivity {
         catch (Exception e)
         {
             Log.d("TAG", "loadJson err "+e);
+            e.printStackTrace();
         }
         return jsonObject;
 
@@ -384,7 +388,7 @@ public class ItemViewDetail extends AppCompatActivity {
         final String[] res = new String[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://49.249.232.210:6262/webItemExportMobileAPI?CategoryCode="+category_code.trim();
+        String url = "http://49.249.232.210:6262/webitemmasterapp?catagory_code="+category_code.trim();
         System.out.println("Printing connection URL "+url+" .");
 
 // Request a string response from the provided URL.
@@ -394,7 +398,7 @@ public class ItemViewDetail extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         System.out.println("Response from Fetch API itemviewdetail "+response);
-                        response = response.replaceAll("\\\\","");
+                      //  response = response.replaceAll("\\\\","");
 
                         callback.onSuccess(response);
 
@@ -584,5 +588,28 @@ public class ItemViewDetail extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    protected void onDestroy() {
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("json_val", 0);
+        edit.commit();
 
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("json_val", 0);
+        edit.commit();
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("json_val", 0);
+        edit.commit();
+        super.onRestart();
+    }
 }
