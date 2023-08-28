@@ -187,8 +187,12 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     xxxl = Integer.parseInt(e6.getText().toString());
                 }
-                if(s ==0 && m ==0 && l ==0 && xl == 0 && xxl == 0 && xxxl == 0)
+                int arr [] = {s,m,l,xl,xxl,xxxl};
+                for(int i:arr)
+                    System.out.println(i);
+                if(maxConsecutiveOnes(arr)<3)
                 {
+                    System.out.println("Non Eligible with Maximum Non Zero "+ maxConsecutiveOnes(arr));
                     Toast.makeText(ItemViewDetail.this, "Please enter atleast one size to submit", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -217,7 +221,8 @@ public class ItemViewDetail extends AppCompatActivity {
     }
 
     private void hitsubmit(String pid,int s, int m, int l, int xl, int xxl, int xxxl) throws AuthFailureError {
-        String url = "http://49.249.232.210:6262/webCreateSOMobileApp?&CustomerNo="+session_id.toString()+"&ItemNo="+pid.toString()+"&ItemSize="+s+","+m+","+l+","+xl+","+xxl+","+xxxl+"&Remark=&DocumentNo=&BillToCustomer=&SellToCustomer=&UserID="+session_username+"&StoreName="+store+"&LocationCode=&ItemCategoryCode="+category_id;
+        String url = "http://49.249.232.210:6262/webCreateSOMobileApp?&CustomerNo="+session_id.toString()+"&ItemNo="+pid.toString()+"&ItemSize=0,"+s+","+m+","+l+","+xl+","+xxl+","+xxxl+"&Remark=&DocumentNo=&BillToCustomer=&SellToCustomer=&UserID="+session_username+"&StoreName="+store+"&LocationCode=&ItemCategoryCode="+category_id;
+        url = url.replace(" ", "%20");
         System.out.println("url request "+url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -611,5 +616,14 @@ public class ItemViewDetail extends AppCompatActivity {
         edit.putInt("json_val", 0);
         edit.commit();
         super.onRestart();
+    }
+    public int maxConsecutiveOnes(int[] nums) {
+
+        int maxvalue=0, count=0;
+        for(int i:nums)
+            maxvalue = Math.max(maxvalue, count= i!=0 ? count+1: 0);
+
+
+        return maxvalue;
     }
 }

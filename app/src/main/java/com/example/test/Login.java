@@ -100,6 +100,7 @@ public class Login extends AppCompatActivity {
                             i.putExtra("session_username",session_username);
                             i.putExtra("customer_code", customer_code);
                             i.putExtra("store_name","");
+                            i.putExtra("login_type","distributor");
                             startActivity(i);
                         }
                         else
@@ -109,6 +110,7 @@ public class Login extends AppCompatActivity {
                             i.putExtra("session_id",username);
                             i.putExtra("session_username",session_username);
                             i.putExtra("customer_code", customer_code);
+                            i.putExtra("login_type","asm");
                             //Intent is used to switch from one activity to another.
                             startActivity(i);
                         }
