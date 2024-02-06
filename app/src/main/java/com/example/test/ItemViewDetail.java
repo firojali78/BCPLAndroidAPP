@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -451,36 +452,107 @@ public class ItemViewDetail extends AppCompatActivity {
     }
 
     private void enableEditText(JSONObject jsonObject) throws JSONException {
-        String size;
+        String size, stock;
         size = jsonObject.getString("Item_Size");
+        try {
+            stock = jsonObject.getString("Stock");
+        }
+        catch (Exception e)
+        {
+            stock ="";
+        }
+
         String size_arr[] = size.split(",");
+        String stock_arr[] = stock.split(",");
         for(int i =0;i<size_arr.length;i++)
         {
             System.out.println("Size available is "+size_arr[i]);
             if(size_arr[i].equals("S"))
             {
                 e1.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e1.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
+
             }
             if(size_arr[i].equals("M"))
             {
                 e2.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e2.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
             }
             if(size_arr[i].equals("L"))
             {
                 e3.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e3.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
             }
             if(size_arr[i].equals("XL"))
             {
                 e4.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e4.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
             }
             if(size_arr[i].equals("XXL"))
             {
                 e5.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e5.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
             }
             if(size_arr[i].equals("XXXL"))
             {
                 e6.setEnabled(true);
+                try {
+                    if(stock_arr[i].equals("0"))
+                    {
+                        e6.setBackgroundColor(Color.RED);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.d("Error","No value in Stock");
+                }
             }
+
         }
     }
 
