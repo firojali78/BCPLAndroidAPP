@@ -317,7 +317,7 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setEnabled(false);
         e5.setEnabled(false);
         e6.setEnabled(false);
-        System.out.println("Printing for debugging name "+name+", url "+url +"pid ");
+        System.out.println("Printing for debugging name "+name+", url "+url +" pid ");
 
         t_name.setText(name);
         t_page_count.setText(counter_items+" / "+counter_items_total);
@@ -394,7 +394,8 @@ public class ItemViewDetail extends AppCompatActivity {
         final String[] res = new String[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://49.249.232.210:6262/webitemmasterapp?catagory_code="+category_code.trim();
+       // String url = "http://49.249.232.210:6262/webitemmasterapp?catagory_code="+category_code.trim();
+        String url = "http://49.249.232.210:6262/webitemmasterappwithStock?catagory_code="+category_code.trim();
         System.out.println("Printing connection URL "+url+" .");
 
 // Request a string response from the provided URL.
@@ -448,6 +449,13 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setText("");
         e5.setText("");
         e6.setText("");
+        e1.setHintTextColor(Color.WHITE);
+        e2.setHintTextColor(Color.WHITE);
+        e3.setHintTextColor(Color.WHITE);
+        e4.setHintTextColor(Color.WHITE);
+        e5.setHintTextColor(Color.WHITE);
+        e6.setHintTextColor(Color.WHITE);
+
 
     }
 
@@ -466,14 +474,15 @@ public class ItemViewDetail extends AppCompatActivity {
         String stock_arr[] = stock.split(",");
         for(int i =0;i<size_arr.length;i++)
         {
-            System.out.println("Size available is "+size_arr[i]);
+            System.out.println("Size available is "+size_arr[i] + " and stock is "+stock_arr[i]);
             if(size_arr[i].equals("S"))
             {
                 e1.setEnabled(true);
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e1.setBackgroundColor(Color.RED);
+                       // e1.setBackgroundColor(Color.RED);
+                        e1.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
@@ -488,7 +497,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e2.setBackgroundColor(Color.RED);
+                        e2.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
@@ -502,7 +511,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e3.setBackgroundColor(Color.RED);
+                        e3.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
@@ -516,7 +525,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e4.setBackgroundColor(Color.RED);
+                        e4.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
@@ -530,7 +539,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e5.setBackgroundColor(Color.RED);
+                        e5.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
@@ -544,7 +553,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 try {
                     if(stock_arr[i].equals("0"))
                     {
-                        e6.setBackgroundColor(Color.RED);
+                        e6.setHintTextColor(Color.RED);
                     }
                 }
                 catch (Exception e)
