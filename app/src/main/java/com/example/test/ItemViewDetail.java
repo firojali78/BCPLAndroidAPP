@@ -317,6 +317,12 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setEnabled(false);
         e5.setEnabled(false);
         e6.setEnabled(false);
+        e1.setHintTextColor(Color.WHITE);
+        e2.setHintTextColor(Color.WHITE);
+        e3.setHintTextColor(Color.WHITE);
+        e4.setHintTextColor(Color.WHITE);
+        e5.setHintTextColor(Color.WHITE);
+        e6.setHintTextColor(Color.WHITE);
         System.out.println("Printing for debugging name "+name+", url "+url +" pid ");
 
         t_name.setText(name);

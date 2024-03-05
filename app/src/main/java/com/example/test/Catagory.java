@@ -1,10 +1,16 @@
 package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,7 +87,13 @@ public class Catagory extends AppCompatActivity {
         } catch (AuthFailureError e) {
             e.printStackTrace();
         }
-
+        t1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Catagory.this, "Downloading", Toast.LENGTH_SHORT).show();
+                fetchdatacsv(session_id);
+            }
+        });
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -112,6 +124,21 @@ public class Catagory extends AppCompatActivity {
         });
     }
 
+    private void fetchdatacsv(String sessionId) {
+
+            DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            Uri uri = Uri.parse("http://49.249.232.210:6262/getusercsv/"+sessionId);
+
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setTitle(sessionId);
+            request.setDescription("Downloading");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setVisibleInDownloadsUi(false);
+            //request.setDestinationUri(Uri.parse("file://" + folderName + "/myfile.mp3"));
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, uri.getLastPathSegment());
+
+            downloadmanager.enqueue(request);
+    }
 
 
 
