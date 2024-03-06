@@ -188,6 +188,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 {
                     xxxl = Integer.parseInt(e6.getText().toString());
                 }
+
                 int arr [] = {s,m,l,xl,xxl,xxxl};
                 for(int i:arr)
                     System.out.println(i);
@@ -317,12 +318,12 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setEnabled(false);
         e5.setEnabled(false);
         e6.setEnabled(false);
-        e1.setHintTextColor(Color.WHITE);
-        e2.setHintTextColor(Color.WHITE);
-        e3.setHintTextColor(Color.WHITE);
-        e4.setHintTextColor(Color.WHITE);
-        e5.setHintTextColor(Color.WHITE);
-        e6.setHintTextColor(Color.WHITE);
+        e1.setHintTextColor(Color.GREEN);
+        e2.setHintTextColor(Color.GREEN);
+        e3.setHintTextColor(Color.GREEN);
+        e4.setHintTextColor(Color.GREEN);
+        e5.setHintTextColor(Color.GREEN);
+        e6.setHintTextColor(Color.GREEN);
         System.out.println("Printing for debugging name "+name+", url "+url +" pid ");
 
         t_name.setText(name);
@@ -455,12 +456,12 @@ public class ItemViewDetail extends AppCompatActivity {
         e4.setText("");
         e5.setText("");
         e6.setText("");
-        e1.setHintTextColor(Color.WHITE);
-        e2.setHintTextColor(Color.WHITE);
-        e3.setHintTextColor(Color.WHITE);
-        e4.setHintTextColor(Color.WHITE);
-        e5.setHintTextColor(Color.WHITE);
-        e6.setHintTextColor(Color.WHITE);
+        e1.setHintTextColor(Color.GREEN);
+        e2.setHintTextColor(Color.GREEN);
+        e3.setHintTextColor(Color.GREEN);
+        e4.setHintTextColor(Color.GREEN);
+        e5.setHintTextColor(Color.GREEN);
+        e6.setHintTextColor(Color.GREEN);
 
 
     }
