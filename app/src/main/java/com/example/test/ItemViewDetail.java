@@ -192,7 +192,7 @@ public class ItemViewDetail extends AppCompatActivity {
                 int arr [] = {s,m,l,xl,xxl,xxxl};
                 for(int i:arr)
                     System.out.println(i);
-                if(maxConsecutiveOnes(arr)<3)
+                if(maxConsecutiveOnes(arr)<0)
                 {
                     System.out.println("Non Eligible with Maximum Non Zero "+ maxConsecutiveOnes(arr));
                     Toast.makeText(ItemViewDetail.this, "Please enter atleast one size to submit", Toast.LENGTH_SHORT).show();
