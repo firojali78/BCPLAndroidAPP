@@ -57,6 +57,7 @@ public class UserPage extends AppCompatActivity {
     int max_size;
     String customer_name, customer_id;
     ArrayList<HashMap<String, String>> c_names;
+    ArrayList<HashMap<String, String>> c_id;
     ArrayAdapter<String> arrayAdapter;
 
     String session_id = "";
@@ -107,8 +108,8 @@ public class UserPage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(UserPage.this, Store_Name.class);
-                intent.putExtra("customer_id", c_names.get(i).get("id"));
-                intent.putExtra("session_id", customer_id);
+                intent.putExtra("customer_id", c_names.get(i).get("name"));
+                intent.putExtra("session_id", c_names.get(i).get("id"));// customer_id);
                 intent.putExtra("session_username", session_username);
 
 
@@ -160,8 +161,8 @@ public class UserPage extends AppCompatActivity {
 
                                 customer_name = jsonObject.getString("Description");
                                 customer_id = jsonObject.getString("No");
-                               // System.out.println(customer_id + " customer_id " + i);
-                             //   System.out.println(customer_name + " customer_name " + i);
+                              //  System.out.println(customer_id + " customer_id " + i);
+                            //    System.out.println(customer_name + " customer_name " + i);
                                 HashMap<String, String> cust_names = new HashMap<>();
                                 cust_names.put("name", customer_name);
                                 cust_names.put("id", customer_id);
@@ -202,6 +203,8 @@ public class UserPage extends AppCompatActivity {
         queue.add(stringRequest);
         return c_names;
     }
+
+
 
     @Override
     protected void onStart() {

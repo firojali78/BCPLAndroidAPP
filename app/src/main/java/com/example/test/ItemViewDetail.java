@@ -246,6 +246,12 @@ public class ItemViewDetail extends AppCompatActivity {
                 String res = response.substring(f+12, response.length()-4);
                 System.out.println("Res "+res);
                 Toast.makeText(ItemViewDetail.this, res, Toast.LENGTH_SHORT).show();
+                e1.setText("");
+                e2.setText("");
+                e3.setText("");
+                e4.setText("");
+                e5.setText("");
+                e6.setText("");
 
             }
         }, new Response.ErrorListener() {
@@ -684,7 +690,9 @@ public class ItemViewDetail extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("json_val", 0);
+        SharedPreferences sh = getSharedPreferences("Pref", Context.MODE_PRIVATE);
+        int index = sh.getInt("json_val",0);
+        edit.putInt("json_val", index);
         edit.commit();
 
         super.onDestroy();
@@ -693,7 +701,9 @@ public class ItemViewDetail extends AppCompatActivity {
     @Override
     protected void onStop() {
         SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("json_val", 0);
+        SharedPreferences sh = getSharedPreferences("Pref", Context.MODE_PRIVATE);
+        int index = sh.getInt("json_val",0);
+        edit.putInt("json_val", index);
         edit.commit();
         super.onStop();
     }
@@ -701,7 +711,9 @@ public class ItemViewDetail extends AppCompatActivity {
     @Override
     protected void onRestart() {
         SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("json_val", 0);
+        SharedPreferences sh = getSharedPreferences("Pref", Context.MODE_PRIVATE);
+        int index = sh.getInt("json_val",0);
+        edit.putInt("json_val", index);
         edit.commit();
         super.onRestart();
     }

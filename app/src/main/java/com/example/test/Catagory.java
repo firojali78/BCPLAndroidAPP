@@ -72,7 +72,7 @@ public class Catagory extends AppCompatActivity {
             store = extras.getString("store_name");
             customer_id = extras.getString("customer_id");
 
-            t1.setText("Hello "+session_username +" ("+ session_id+ " )");
+            t1.setText("Hello "+session_username +" ("+ session_id+ " - "+ customer_id+ " )");
 
             //The key argument here must match that used in the other activity
             for (String key: extras.keySet())
@@ -91,7 +91,7 @@ public class Catagory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Catagory.this, "Downloading", Toast.LENGTH_SHORT).show();
-                fetchdatacsv(session_id);
+                fetchdatacsv(session_id, session_username, store);
             }
         });
 
@@ -124,13 +124,21 @@ public class Catagory extends AppCompatActivity {
         });
     }
 
-    private void fetchdatacsv(String sessionId) {
+    private void fetchdatacsv(String sessionId, String session_Username, String store_name) {
 
             DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-            Uri uri = Uri.parse("http://49.249.232.210:6262/getusercsv/"+sessionId);
-
+            Uri uri;
+            String filename;
+            if(store_name.length() <1)
+            {
+                filename = sessionId;
+            }
+            else{
+                filename = session_Username;
+            }
+            uri = Uri.parse("http://49.249.232.210:6262/getusercsv/"+filename);
             DownloadManager.Request request = new DownloadManager.Request(uri);
-            request.setTitle(sessionId);
+            request.setTitle(filename);
             request.setDescription("Downloading");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setVisibleInDownloadsUi(false);
