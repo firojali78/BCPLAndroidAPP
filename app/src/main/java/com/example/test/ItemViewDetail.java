@@ -192,6 +192,17 @@ public class ItemViewDetail extends AppCompatActivity {
                 int arr [] = {s,m,l,xl,xxl,xxxl};
                 for(int i:arr)
                     System.out.println(i);
+                try {
+                    //TODO validate stock on submit
+                    JSONObject jsonObject;
+                    JSONArray jsonArray = new JSONArray(json);
+                    jsonObject = jsonArray.getJSONObject(index);
+                    String stock = jsonObject.getString("Stock");
+                    String size = jsonObject.getString("Item_Size");
+                    System.out.println("Debugging bc "+stock + " "+size);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
                 if(maxConsecutiveOnes(arr)<0)
                 {
                     System.out.println("Non Eligible with Maximum Non Zero "+ maxConsecutiveOnes(arr));

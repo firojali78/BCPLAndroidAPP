@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Catagory extends AppCompatActivity {
-    TextView t1;
+    TextView t1,t2;
     ListView lv;
     int max_size;
     String catagory_name="";
@@ -58,6 +58,7 @@ public class Catagory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catagory);
         t1 = findViewById(R.id.tv_catagory_customer);
+        t2 = findViewById(R.id.tvcategory);
         lv =findViewById(R.id.lv_catagory);
 
         if(getSupportActionBar() != null)
@@ -92,6 +93,21 @@ public class Catagory extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Catagory.this, "Downloading", Toast.LENGTH_SHORT).show();
                 fetchdatacsv(session_id, session_username, store);
+            }
+        });
+
+        t2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Catagory.this,
+                        SearchPID.class);
+
+                intent.putExtra("session_username", session_username);
+                intent.putExtra("session_id", session_id);
+                intent.putExtra("customer_id", customer_id);
+                intent.putExtra("store_name", store);
+                startActivity(intent);
+
             }
         });
 
