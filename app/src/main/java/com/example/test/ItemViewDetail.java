@@ -3,6 +3,7 @@ package com.example.test;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -216,6 +218,12 @@ public class ItemViewDetail extends AppCompatActivity {
                     }
                     //    Toast.makeText(ItemViewDetail.this, "Data Updated for PID "+ pid, Toast.LENGTH_SHORT).show();
                 }}
+        });
+        t_page_count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fetchdatacsv(session_id, session_username, store);
+            }
         });
 
         /*
@@ -696,6 +704,29 @@ public class ItemViewDetail extends AppCompatActivity {
                 break;
         }
         return super.onTouchEvent(event);
+    }
+    private void fetchdatacsv(String sessionId, String session_Username, String store_name) {
+
+        DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri;
+        String filename;
+        if(store_name.length() <1)
+        {
+            filename = sessionId;
+        }
+        else{
+            filename = session_Username;
+        }
+        uri = Uri.parse("http://49.249.232.210:6262/getusercsv/"+filename);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setTitle(filename);
+        request.setDescription("Downloading");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setVisibleInDownloadsUi(false);
+        //request.setDestinationUri(Uri.parse("file://" + folderName + "/myfile.mp3"));
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, uri.getLastPathSegment());
+
+        downloadmanager.enqueue(request);
     }
 
     @Override
