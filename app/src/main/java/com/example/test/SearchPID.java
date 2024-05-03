@@ -71,11 +71,13 @@ public class SearchPID extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Intent intent = new Intent(SearchPID.this, LoadPID.class);
-                intent.putExtra("pid", c_names.get(i).get("id"));
+              //  intent.putExtra("pid", c_names.get(i).get("id"));
+                intent.putExtra("pid", parent.getItemAtPosition(i).toString());
                 intent.putExtra("session_id", session_id);
                 intent.putExtra("session_username", session_username);
                 intent.putExtra("customer_id", customer_id);
                 intent.putExtra("store_name", store);
+              //  System.out.println("Clicked index "+ i + " ID "+id+ " IDTEMP " + parent.getItemAtPosition(i).toString()+" Names "+ c_names.toString() );
 
                 startActivity(intent);
             }
@@ -84,12 +86,14 @@ public class SearchPID extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchPID.this.arrayAdapter.getFilter().filter(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 SearchPID.this.arrayAdapter.getFilter().filter(newText);
+
                 return false;
             }
         });
