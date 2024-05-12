@@ -108,7 +108,8 @@ public class UserPage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(UserPage.this, Store_Name.class);
-                intent.putExtra("customer_id", c_names.get(i).get("name"));
+               // intent.putExtra("customer_id", c_names.get(i).get("name"));
+                intent.putExtra("customer_id", adapterView.getItemAtPosition(i).toString());
                 intent.putExtra("session_id", c_names.get(i).get("id"));// customer_id);
                 intent.putExtra("session_username", session_username);
 
