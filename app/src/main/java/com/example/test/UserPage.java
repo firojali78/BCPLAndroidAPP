@@ -176,7 +176,7 @@ public class UserPage extends AppCompatActivity {
                                // arrayAdapter.clear();
                                 for (int ii = 0; ii < array_name.length; ii++)
                                 {
-                                    array_name[ii] = c_names.get(ii).get("name");
+                                    array_name[ii] = c_names.get(ii).get("name") +"~"+ c_names.get(ii).get("id");
                                 //    System.out.println(array_name[ii] +" array_name ");
 
                                 }

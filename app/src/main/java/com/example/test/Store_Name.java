@@ -27,14 +27,18 @@ public class Store_Name extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            session_username = extras.getString("session_username");
-            session_id = extras.getString("session_id");
-            customer_id = extras.getString("customer_id");
-
             for (String key: extras.keySet())
             {
                 System.out.println( "Keys in bundles in Store Name Page "+key + " "+extras.getString(key) );
             }
+            String [] temparr = extras.getString("customer_id").split("~");
+            session_username = extras.getString("session_username");
+         //   session_id = extras.getString("session_id");
+           // customer_id = extras.getString("customer_id");
+            session_id = temparr[0];
+            customer_id = temparr[1];
+
+
 
         }
         b1.setOnClickListener(new View.OnClickListener() {
